@@ -4,13 +4,13 @@ var q = function (element) {
 var qAll = function (element) {
   return document.querySelectorAll(element);
 };
-// ^[a-z]{3,20}$ any letter of alphabet minum 3 maximum 20
+// ^[a-z]{3,20}$ any letter of alphabet minum 2 maximum 20
 //emaill: ^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$
 //password: ^(?=.*\d.*\d).{8,}$ // minimum 2 numbers at least 8 charachters
 
 function Validation() {
     this.patterns = {
-    name: /^[a-z0-9]{4,22}$/i,
+    name: /^[a-z0-9]{3,22}$/i,
     email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i,
     password: /^(?=.*\d.*\d).{8,}$/i
     }
@@ -36,6 +36,7 @@ for (var i = 0; i < 3; i++) {
 };
 q('#password').addEventListener('input', function () {
   q('#password-repeat').disabled = false;
+  check(this.value == q('#password-repeat').value, q('#password-repeat'));
 })
 
 q('#password-repeat').addEventListener('click', function () {
@@ -47,6 +48,9 @@ q('#password-repeat').addEventListener('input', function () {
   var userPassword = q('#password').value;
   check(this.value == userPassword, this);
 });
+
+
+
 q('form button').addEventListener('click', function (e) {
   e.preventDefault();
   var checkAll = [];
@@ -82,7 +86,7 @@ function check(value, element) {
   }
 }
 
-
+// animation
 for (let i = 0; i < qAll('.inputContainer input').length; i++) {
   qAll('.inputContainer input')[i].addEventListener('focus', function () {
     qAll('.inputContainer label')[i].style.fontSize = '10px';
